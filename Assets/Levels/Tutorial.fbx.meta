@@ -1,0 +1,746 @@
+fileFormatVersion: 2
+guid: a7b5e4a2c7ce4084299aaa83e354daad
+ModelImporter:
+  serializedVersion: 21300
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping
+    second: {fileID: 2100000, guid: 6663f195a4971dc40a7d3127e7dfe2f0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_1
+    second: {fileID: 2100000, guid: b20d338bdb8c8e443bf12dcaa85d4ad3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_10
+    second: {fileID: 2100000, guid: 3debdae36e0d6e54a99a0f7544473404, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_100
+    second: {fileID: 2100000, guid: f61a90f2699ff7a4f9f7e53e2f8e8218, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_101
+    second: {fileID: 2100000, guid: 0c70c6c887120c346a215879178041f4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_102
+    second: {fileID: 2100000, guid: 037fb31e1a56361458a486f9293043ca, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_103
+    second: {fileID: 2100000, guid: d24c1453444db6f4591dfd4024b4a49f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_104
+    second: {fileID: 2100000, guid: a8718d76013c7db48852d9110a2e93c4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_105
+    second: {fileID: 2100000, guid: 44cdd13fc42285144958f9b4a71fcc72, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_106
+    second: {fileID: 2100000, guid: 88481f1abc6ec3d48882d99c0c492437, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_107
+    second: {fileID: 2100000, guid: caa57ce7a105afc45b6e4bd574146e90, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_108
+    second: {fileID: 2100000, guid: b9cf14ecda70f5544bd9da95ccfdd01e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_109
+    second: {fileID: 2100000, guid: d36218fa08ad2574a98033956a90f5d2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_11
+    second: {fileID: 2100000, guid: 6e1b4c5649ba7fa408433d8c882c6909, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_110
+    second: {fileID: 2100000, guid: c1f473b7c27e72045b9dd438c9769ada, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_111
+    second: {fileID: 2100000, guid: 8d51f8839707026438c69d0c876731d2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_112
+    second: {fileID: 2100000, guid: d5eb51e1dd3e65e4a8ea6e5a0b9b0ebd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_113
+    second: {fileID: 2100000, guid: a24fd30b171c1994c9aa8194bec99666, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_114
+    second: {fileID: 2100000, guid: bfb08f948c83fd5449cb84f73d2d96cb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_115
+    second: {fileID: 2100000, guid: 9378c835ba4839b469230626b611901b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_116
+    second: {fileID: 2100000, guid: 24f8ecca9b81d26459fb368686702b1d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_117
+    second: {fileID: 2100000, guid: 3cf43858410f90a428b6119079139ea2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_118
+    second: {fileID: 2100000, guid: af44b2e44065586479808065ee167cc7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_119
+    second: {fileID: 2100000, guid: c1085c0d0972efe48bb7dbb0d6042c2a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_12
+    second: {fileID: 2100000, guid: d3b1c6af406a2334fb8b5ced9aa36bf6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_120
+    second: {fileID: 2100000, guid: c744cf62c3917284297e3730c7a53958, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_121
+    second: {fileID: 2100000, guid: 0481aca38a1702b499eb459d6d581760, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_122
+    second: {fileID: 2100000, guid: 9c15739b0bb881a45ad4d731dab4aae0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_123
+    second: {fileID: 2100000, guid: 02e26604b90809944a391ffb462d283d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_124
+    second: {fileID: 2100000, guid: 17d2daa5d940ab1459e27ec2a4723137, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_125
+    second: {fileID: 2100000, guid: d526d008b35f5e54ea4ba15e3cf48e3b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_126
+    second: {fileID: 2100000, guid: afd31b81d6d2f7d46a11212fc7d94686, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_127
+    second: {fileID: 2100000, guid: c8b99561a48ce0e43a7eef696c9069d6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_13
+    second: {fileID: 2100000, guid: 68cc7a04abfba854aa99d86b13ac34f2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_14
+    second: {fileID: 2100000, guid: 6a39a7723e1e6b44aac72d17f4740bae, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_15
+    second: {fileID: 2100000, guid: 3aa851a8c3f30354e97159dc32746fc8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_16
+    second: {fileID: 2100000, guid: b4d09a49c16699e47ba35b92af7776a0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_17
+    second: {fileID: 2100000, guid: c4dc43b3338dcb1469c358d2e3383ec5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_18
+    second: {fileID: 2100000, guid: 21fa06bfa7aa3ef4d96ae9483725dd36, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_19
+    second: {fileID: 2100000, guid: 21fb1a14d15ee774f960b62f5fbffa02, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_2
+    second: {fileID: 2100000, guid: ea54ba1bb980c2a4286fe5f7bd47a1d1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_20
+    second: {fileID: 2100000, guid: 067dbdcb5fbf2c442831e05a85275698, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_21
+    second: {fileID: 2100000, guid: 1fb37e7b8a2c03849af53d5ce2625fee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_22
+    second: {fileID: 2100000, guid: 48d5b858168308e4bbd80a35d70cb1ba, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_23
+    second: {fileID: 2100000, guid: b9e906de965a6b842b46412591f7703a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_24
+    second: {fileID: 2100000, guid: 816a41e2ebf01a04aa6a52eabed17cc4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_25
+    second: {fileID: 2100000, guid: 21efff8b88854cb43aa81d3f1e64cb87, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_26
+    second: {fileID: 2100000, guid: 53ccb6ab2c41952478d4f21b3f9ee761, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_27
+    second: {fileID: 2100000, guid: 842085292ab18cc43a4adc63352fc79d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_28
+    second: {fileID: 2100000, guid: 4f21edce3d647914997eb9a26e34e703, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_29
+    second: {fileID: 2100000, guid: dd8b4b40f1ec6b44bb7638cc265e124a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_3
+    second: {fileID: 2100000, guid: 8e9b43873b8d94046a2da477f68ba9fd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_30
+    second: {fileID: 2100000, guid: 063599b2356de6c429f0bc1fd74c2109, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_31
+    second: {fileID: 2100000, guid: 2a14564e6a9fe5747816959a37cc8f35, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_32
+    second: {fileID: 2100000, guid: 65a2975797b834e4c80164c88770f8a4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_33
+    second: {fileID: 2100000, guid: 9fb7a510614910241bc0da1d5ba80c6c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_34
+    second: {fileID: 2100000, guid: f1abf29b8eb51b14ca029b84faf9849b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_35
+    second: {fileID: 2100000, guid: 5142ab6225fb5ec419bb3ad6e3de25a9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_36
+    second: {fileID: 2100000, guid: 1f8e963690e3e5149a4dc0673c1b94f3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_37
+    second: {fileID: 2100000, guid: 51d0f1969c617894e8eb62bca7fbfcbb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_38
+    second: {fileID: 2100000, guid: 95ac5e3f99cbab547bc92e0581330b56, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_39
+    second: {fileID: 2100000, guid: 6f750176f70a1b344ac0dc86468ce0ed, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_4
+    second: {fileID: 2100000, guid: b4e11a87c0e875e42a46e8add21337b3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_40
+    second: {fileID: 2100000, guid: aa470468742e0904391d88e78d83136e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_41
+    second: {fileID: 2100000, guid: 72e61d7a98d305047a4deeebe1276948, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_42
+    second: {fileID: 2100000, guid: 8231e2118e45d72459814356cff46258, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_43
+    second: {fileID: 2100000, guid: a87b59280fa79374d882f427a4fb951a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_44
+    second: {fileID: 2100000, guid: c8f60bb39f15f0f479428f718af57684, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_45
+    second: {fileID: 2100000, guid: db2191de34adf3446909cbfaefae414b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_46
+    second: {fileID: 2100000, guid: 07cf482fbaee24145a1102aa62e21428, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_47
+    second: {fileID: 2100000, guid: 3d6e6055593c848428c58278e05e6a04, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_48
+    second: {fileID: 2100000, guid: 294ca711c8ab44a45bdda97c0ae32e4d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_49
+    second: {fileID: 2100000, guid: 0183b2cca84e4214391b946948218501, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_5
+    second: {fileID: 2100000, guid: fb3959ef9b9e1524c837500b359e8232, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_50
+    second: {fileID: 2100000, guid: 3d44454e717af964fad33087faf502a5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_51
+    second: {fileID: 2100000, guid: 4f0124399954cc34eaa4b1d1178c375d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_52
+    second: {fileID: 2100000, guid: 7d8f35d48fe222d4fbd2eb42c4cf51cc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_53
+    second: {fileID: 2100000, guid: a4fbd0757c7be934eaccc9805c0c255d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_54
+    second: {fileID: 2100000, guid: 287943dc88f27af409f35374b2652b5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_55
+    second: {fileID: 2100000, guid: 6422dac10aad4e2469656ba80e412456, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_56
+    second: {fileID: 2100000, guid: f7220942804fe344abe39b7d3a14c9f6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_57
+    second: {fileID: 2100000, guid: f84fec0c2b384eb41bb3eeb64de5fda1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_58
+    second: {fileID: 2100000, guid: bf8d4b51e616c7b49b510fdacd826e3c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_59
+    second: {fileID: 2100000, guid: 674c1e463413a644e985b8231534e3a1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_6
+    second: {fileID: 2100000, guid: 0a25767f01442974f8cef95a524dcfaf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_60
+    second: {fileID: 2100000, guid: 1078a8e7d308780429b40f9fb67bec4e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_61
+    second: {fileID: 2100000, guid: e30a5f0e05c1b894999f3d28c7e5df27, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_62
+    second: {fileID: 2100000, guid: 5d69529a7fe8dd24cacc90b8f811ef3e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_63
+    second: {fileID: 2100000, guid: 87b75263cc2d806468a051db0fe5ef68, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_64
+    second: {fileID: 2100000, guid: 5af08fa2950da9e44a5917d411638c1f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_65
+    second: {fileID: 2100000, guid: 871f9e7fd8359cc4b8617720cfd70a5f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_66
+    second: {fileID: 2100000, guid: 2bff0b6148adbe84eaf781ebfab0a821, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_67
+    second: {fileID: 2100000, guid: 148ffa991ad90be42a9b67d2771ed8bb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_68
+    second: {fileID: 2100000, guid: 6f6af3ba3804ce14f8b032776067defb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_69
+    second: {fileID: 2100000, guid: ec84ea24bbac07f48917de079e85b040, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_7
+    second: {fileID: 2100000, guid: a610353a242247e40bc852a354a0df1f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_70
+    second: {fileID: 2100000, guid: 046aa69a01429fe419efab4035d0e365, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_71
+    second: {fileID: 2100000, guid: 946ea1c9a33455d41a4f5a33703948e6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_72
+    second: {fileID: 2100000, guid: 65319e25f4014f64d84c96b76bf296cc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_73
+    second: {fileID: 2100000, guid: 1643ea3dc58052149b59ea3f8af67a19, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_74
+    second: {fileID: 2100000, guid: 352d7032dc5526b4fb2d7c3915becc61, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_75
+    second: {fileID: 2100000, guid: 091facdc297a3484ea575c5213b1c2b4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_76
+    second: {fileID: 2100000, guid: 6b41cb7fdb2d4c94686219b5a3f62c90, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_77
+    second: {fileID: 2100000, guid: 05f45a277f6af0145b62c70f434ffdb0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_78
+    second: {fileID: 2100000, guid: 0f2af63df670fa5418764c2d3d2f82c2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_79
+    second: {fileID: 2100000, guid: 9ce098105505a764db918f515f6ed35d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_8
+    second: {fileID: 2100000, guid: 60bdf5a0f14f9484892c99f137309653, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_80
+    second: {fileID: 2100000, guid: d2bb3d66da02afe45a79cfeb19dd1218, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_81
+    second: {fileID: 2100000, guid: 72a7623af7ceaa5498667322efd53c7d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_82
+    second: {fileID: 2100000, guid: e0c968f4e6be3ef49949aac77acabcb7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_83
+    second: {fileID: 2100000, guid: bacd4842ec53dd749a5e8304612884c2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_84
+    second: {fileID: 2100000, guid: b03a3eabef1ecee4e9bb555299064824, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_85
+    second: {fileID: 2100000, guid: c0c05522de0d8414280476e7bbb27208, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_86
+    second: {fileID: 2100000, guid: 8125682d6c22f93468093e2326aed0eb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_87
+    second: {fileID: 2100000, guid: ed4605d905352014d93b52eb957bfa12, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_88
+    second: {fileID: 2100000, guid: 2b668baef40a93f4e9e76c6f0051502d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_89
+    second: {fileID: 2100000, guid: b1ab25cdb13987242b431d50ed569784, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_9
+    second: {fileID: 2100000, guid: 5b16a62d5daf46a4283120d8c584e217, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_90
+    second: {fileID: 2100000, guid: 89031ce65af526440bfa5ab17e3ae63d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_91
+    second: {fileID: 2100000, guid: 07f498cf4deb44141a02d9ffe824d883, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_92
+    second: {fileID: 2100000, guid: 909379ca55c82e84181347b64af50e42, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_93
+    second: {fileID: 2100000, guid: d4db61dcbf1ff8643843e00f23a8c097, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_94
+    second: {fileID: 2100000, guid: 75b2ec5a046bc1848975d51dd73a88e5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_95
+    second: {fileID: 2100000, guid: 486eab02d076a4342a79c09f5a945005, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_96
+    second: {fileID: 2100000, guid: d794b85c060c7a84ba8d4335a67a888b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_97
+    second: {fileID: 2100000, guid: 972a7af6dcf0a9b4dbd8aef7f75bfdc7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_98
+    second: {fileID: 2100000, guid: 9ad3654538179fe428565fe4c0dd9fae, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Custom_Clipping_99
+    second: {fileID: 2100000, guid: ccb5caf506653bb44a23b8c8421e0d70, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 1
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
