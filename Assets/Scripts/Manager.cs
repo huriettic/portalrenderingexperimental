@@ -48,13 +48,15 @@ public class Manager : MonoBehaviour
 
     public List<Face> Faces = new List<Face>();
 
+    public List<FaceMesh> FaceMeshes = new List<FaceMesh>();
+
     public List<Polyhedron> Polyhedrons = new List<Polyhedron>();
 
     public List<Polyhedron> Sectors = new List<Polyhedron>();
 
     public List<Polyhedron> VisitedSector = new List<Polyhedron>();
 
-    public List<GameObject> FaceMesh = new List<GameObject>();
+    public List<GameObject> LevelMeshes = new List<GameObject>();
 
     [System.Serializable]
     public class Polyhedron
@@ -82,9 +84,8 @@ public class Manager : MonoBehaviour
         public int Collision;
         public int FaceMesh;
         public List<Vector3> Vertices;
-        public List<int> Triangles;
 
-        public Face(int plane, int portal, int render, int collision, int facemesh, List<Vector3> verticeslist, List<int> triangleslist)
+        public Face(int plane, int portal, int render, int collision, int facemesh, List<Vector3> verticeslist)
         {
             Plane = plane;
             Portal = portal;
@@ -92,7 +93,19 @@ public class Manager : MonoBehaviour
             FaceMesh = facemesh;
             Collision = collision;
             Vertices = verticeslist;
+        }
+    }
+
+    [System.Serializable]
+    public class FaceMesh
+    {
+        public List<int> Triangles;
+        public List<Vector2> UVs;
+
+        public FaceMesh(List<int> triangleslist, List<Vector2> uvlist)
+        {
             Triangles = triangleslist;
+            UVs = uvlist;
         }
     }
 
@@ -113,9 +126,9 @@ public class Manager : MonoBehaviour
 
         AddMeshCollider();
 
-        CreateFacePlane();
+        CreatePolygonPlane();
 
-        PlayerStart();
+        Playerstart();
 
         Player.GetComponent<CharacterController>().enabled = true;
     }
@@ -127,7 +140,7 @@ public class Manager : MonoBehaviour
 
         Sectors.Clear();
 
-        GetPolyhedrons(CurrentSector);
+        CheckSector(CurrentSector);
 
         CamPlanes.Clear();
 
@@ -139,7 +152,7 @@ public class Manager : MonoBehaviour
 
         VisitedSector.Clear();
 
-        GetPortals(CamPlanes, CurrentSector);
+        GetSector(CamPlanes, CurrentSector);
     }
 
     public void Load()
@@ -160,13 +173,13 @@ public class Manager : MonoBehaviour
         {
             for (int e = 0; e < Polyhedrons[i].Render.Count; e++)
             {
-                FaceMesh[Faces[Polyhedrons[i].Render[e]].FaceMesh].GetComponent<Renderer>().enabled = false;
-                FaceMesh[Faces[Polyhedrons[i].Render[e]].FaceMesh].GetComponent<Renderer>().material.shader = shader;
+                LevelMeshes[Faces[Polyhedrons[i].Render[e]].FaceMesh].GetComponent<Renderer>().enabled = false;
+                LevelMeshes[Faces[Polyhedrons[i].Render[e]].FaceMesh].GetComponent<Renderer>().material.shader = shader;
             }
         }
     }
 
-    public void PlayerStart()
+    public void Playerstart()
     {
         for (int i = 0; i < LevelObjects.Count; i++)
         {
@@ -224,7 +237,7 @@ public class Manager : MonoBehaviour
 
         for (int i = 0; i < FFaces.gameObject.transform.childCount; i++)
         {
-            FaceMesh.Add(FFaces.gameObject.transform.GetChild(i).gameObject);
+            LevelMeshes.Add(FFaces.gameObject.transform.GetChild(i).gameObject);
         }
 
         GameObject FObjects = GameObject.Find("MapObjects");
@@ -241,18 +254,18 @@ public class Manager : MonoBehaviour
         {
             for (int e = 0; e < Polyhedrons[i].Collision.Count; e++)
             {
-                FaceMesh[Faces[Polyhedrons[i].Collision[e]].FaceMesh].AddComponent<MeshCollider>();
+                LevelMeshes[Faces[Polyhedrons[i].Collision[e]].FaceMesh].AddComponent<MeshCollider>();
             }    
         }
     }
 
-    public void CreateFacePlane()
+    public void CreatePolygonPlane()
     {
         for (int i = 0; i < Faces.Count; i++)
         {
-            Vector3 p1 = Faces[i].Vertices[Faces[i].Triangles[0]];
-            Vector3 p2 = Faces[i].Vertices[Faces[i].Triangles[1]];
-            Vector3 p3 = Faces[i].Vertices[Faces[i].Triangles[2]];
+            Vector3 p1 = Faces[i].Vertices[0];
+            Vector3 p2 = Faces[i].Vertices[1];
+            Vector3 p3 = Faces[i].Vertices[2];
 
             Planes.Add(new Plane(p1, p2, p3));
         }
@@ -261,6 +274,25 @@ public class Manager : MonoBehaviour
     public float PointDistanceToPlane(Plane plane, Vector3 point)
     {
         return plane.normal.x * point.x + plane.normal.y * point.y + plane.normal.z * point.z + plane.distance;
+    }
+
+    public bool CheckRadius(Polyhedron PSector)
+    {
+        Vector3 CamPoint = Cam.transform.position;
+
+        bool PointIn = true;
+
+        for (int e = 0; e < PSector.Planes.Count; e++)
+        {
+            Plane p = Planes[PSector.Planes[e]];
+
+            if (PointDistanceToPlane(p, CamPoint) < -0.51f)
+            {
+                PointIn = false;
+                break;
+            }
+        }
+        return PointIn;
     }
 
     public void CreateClippingPlanes(List<Vector3> aVertices, List<Plane> aList, Vector3 aViewPos)
@@ -367,88 +399,75 @@ public class Manager : MonoBehaviour
         return invertices;
     }
 
-    public bool CheckRadius(Polyhedron asector, Vector3 campoint)
+    public void GetSectors(Polyhedron ASector)
     {
-        bool PointIn = true;
-
-        for (int e = 0; e < asector.Planes.Count; e++)
-        {
-            if (PointDistanceToPlane(Planes[asector.Planes[e]], campoint) < -0.51f)
-            {
-                PointIn = false;
-                break;
-            }
-        }
-        return PointIn;
-    }
-
-    public bool CheckPolyhedron(Polyhedron asector, Vector3 campoint)
-    {
-        bool PointIn = true;
-
-        for (int i = 0; i < asector.Planes.Count; i++)
-        {
-            if (PointDistanceToPlane(Planes[asector.Planes[i]], campoint) < 0)
-            {
-                PointIn = false;
-                break;
-            }
-        }
-        return PointIn;
-    }
-
-    public void GetPolyhedrons(Polyhedron ASector)
-    {
-        Vector3 CamPoint = Cam.transform.position;
-
         Sectors.Add(ASector);
 
         for (int i = 0; i < ASector.Portal.Count; ++i)
         {
-            Face f = Faces[ASector.Portal[i]];
+            Face p = Faces[ASector.Portal[i]];
 
-            bool t = CheckRadius(Polyhedrons[f.Portal], CamPoint);
+            bool t = CheckRadius(Polyhedrons[p.Portal]);
 
-            if (Sectors.Contains(Polyhedrons[f.Portal]))
+            if (Sectors.Contains(Polyhedrons[p.Portal]))
             {
                 continue;
             }
 
             if (t == true)
             {
-                GetPolyhedrons(Polyhedrons[f.Portal]);
-
-                continue;
-            }
-        }
-
-        bool p = CheckPolyhedron(ASector, CamPoint);
-
-        if (p == true)
-        {
-            CurrentSector = ASector;
-
-            IEnumerable<Polyhedron> except = Polyhedrons.Except(Sectors);
-
-            foreach (Polyhedron sector in except)
-            {
-                foreach (int collision in sector.Collision)
-                {
-                    Physics.IgnoreCollision(Player, FaceMesh[Faces[collision].FaceMesh].GetComponent<MeshCollider>(), true);
-                }
-            }
-
-            foreach (Polyhedron sector in Sectors)
-            {
-                foreach (int collision in sector.Collision)
-                {
-                    Physics.IgnoreCollision(Player, FaceMesh[Faces[collision].FaceMesh].GetComponent<MeshCollider>(), false);
-                }
+                GetSectors(Polyhedrons[p.Portal]);
             }
         }
     }
 
-    public void GetPortals(List<Plane> APlanes, Polyhedron BSector)
+    public void CheckSector(Polyhedron Current)
+    {
+        GetSectors(Current);
+
+        Vector3 CamPoint = Cam.transform.position;
+
+        for (int i = 0; i < Sectors.Count; i++)
+        {
+            bool PointIn = true;
+
+            for (int e = 0; e < Sectors[i].Planes.Count; e++)
+            {
+                Plane p = Planes[Sectors[i].Planes[e]];
+
+                if (PointDistanceToPlane(p, CamPoint) < 0)
+                {
+                    PointIn = false;
+                    break;
+                }
+            }
+
+            if (PointIn == true)
+            {
+                CurrentSector = Sectors[i];
+            }
+        }
+
+        IEnumerable<Polyhedron> except = Polyhedrons.Except(Sectors);
+
+        foreach (Polyhedron sector in except)
+        {
+            foreach (int collision in sector.Collision)
+            {
+                Physics.IgnoreCollision(Player, LevelMeshes[Faces[collision].FaceMesh].GetComponent<MeshCollider>(), true);
+            }
+        }
+
+        foreach (Polyhedron sector in Sectors)
+        {
+            foreach (int collision in sector.Collision)
+            {
+                Physics.IgnoreCollision(Player, LevelMeshes[Faces[collision].FaceMesh].GetComponent<MeshCollider>(), false);
+            }
+        }
+    }
+
+    public void GetSector(List<Plane> APlanes, Polyhedron BSector)
     {
         Vector3 CamPoint = Cam.transform.position;
 
@@ -467,7 +486,7 @@ public class Manager : MonoBehaviour
 
         for (int i = 0; i < BSector.Render.Count; i++)
         {
-            GameObject r = FaceMesh[Faces[BSector.Render[i]].FaceMesh];
+            GameObject r = LevelMeshes[Faces[BSector.Render[i]].FaceMesh];
 
             float d = PointDistanceToPlane(Planes[BSector.Render[i]], CamPoint);
 
@@ -483,7 +502,7 @@ public class Manager : MonoBehaviour
 
         for (int i = 0; i < BSector.Portal.Count; ++i)
         {
-            Face g = Faces[BSector.Portal[i]];
+            Face p = Faces[BSector.Portal[i]];
 
             float d = PointDistanceToPlane(Planes[BSector.Portal[i]], CamPoint);
 
@@ -494,32 +513,32 @@ public class Manager : MonoBehaviour
                 continue;
             }
 
-            if (VisitedSector.Contains(Polyhedrons[g.Portal]) && d <= 0)
+            if (VisitedSector.Contains(Polyhedrons[p.Portal]) && d <= 0)
             {
                 continue;
             }
 
-            if (Sectors.Contains(Polyhedrons[g.Portal]))
+            if (Sectors.Contains(Polyhedrons[p.Portal]))
             {
                 for (int n = 0; n < APlanes.Count; n++)
                 {
                     PortalPlanes.Add(APlanes[n]);
                 }
 
-                GetPortals(PortalPlanes, Polyhedrons[g.Portal]);
+                GetSector(PortalPlanes, Polyhedrons[p.Portal]);
 
                 continue;
             }
 
             if (d != 0)
             {
-                List<Vector3> verticesout = ClippingPlanes(g.Vertices, APlanes);
+                List<Vector3> verticesout = ClippingPlanes(p.Vertices, APlanes);
 
                 if (verticesout.Count > 2)
                 {
                     CreateClippingPlanes(verticesout, PortalPlanes, CamPoint);
 
-                    GetPortals(PortalPlanes, Polyhedrons[g.Portal]);
+                    GetSector(PortalPlanes, Polyhedrons[p.Portal]);
                 }
             }
         }
