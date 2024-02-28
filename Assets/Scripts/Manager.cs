@@ -1,14 +1,27 @@
-using System.IO;
 using System;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using System.Runtime.Serialization.Json;
 
 public class Manager : MonoBehaviour
 {
     public string Name;
+
+    public int rm;
+
+    public Vector3 A;
+    public Vector3 B;
+    public Vector3 C;
+
+    int a;
+    int b;
+    int c;
+
+    public Plane XPlane;
+    public Plane YPlane;
+
+    public Plane TopPlane;
+    public Plane LeftPlane;
 
     public float lerpX;
     public float lerpY;
@@ -26,9 +39,9 @@ public class Manager : MonoBehaviour
 
     public Camera Cam;
 
-    private Vector4[] PlanePos;
+    public GameObject h;
 
-    public MaterialPropertyBlock BlockOne;
+    public List<Mesh> RenderMeshes = new List<Mesh>();
 
     public List<GameObject> LevelObjects = new List<GameObject>();
 
@@ -51,6 +64,18 @@ public class Manager : MonoBehaviour
     public List<Polyhedron> VisitedSector = new List<Polyhedron>();
 
     public List<GameObject> LevelMeshes = new List<GameObject>();
+
+    public List<Vector3> verticesout = new List<Vector3>();
+
+    public List<Vector3> r = new List<Vector3>();
+
+    public List<int> Triangles = new List<int>();
+
+    public List<Vector2> UVs = new List<Vector2>();
+
+    public List<Vector3> outvertices = new List<Vector3>();
+
+    public List<float> m_Dists = new List<float>();
 
     [System.Serializable]
     public class Polyhedron
@@ -109,9 +134,7 @@ public class Manager : MonoBehaviour
 
         GetlLists();
 
-        HidePolygons();
-
-        AddMeshCollider();
+        MakeMeshes();
 
         CreatePolygonPlane();
     }
@@ -119,11 +142,17 @@ public class Manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        a = 0;
+
         Cursor.lockState = CursorLockMode.Locked;
 
-        PlanePos = new Vector4[20];
+        A = new Vector3(0, 0, 0);
+        B = new Vector3(-1, 0, 0);
+        C = new Vector3(0, 0, -1);
 
-        BlockOne = new MaterialPropertyBlock();
+        XPlane = new Plane((C - A).normalized, A);
+
+        YPlane = new Plane((B - A).normalized, A);
 
         Playerstart();
 
@@ -149,6 +178,8 @@ public class Manager : MonoBehaviour
 
         VisitedSector.Clear();
 
+        rm = 0;
+
         GetPortals(CamPlanes, CurrentSector);
     }
 
@@ -157,20 +188,6 @@ public class Manager : MonoBehaviour
         string LoadLevel = Resources.Load<TextAsset>(Name).text;
 
         JsonUtility.FromJsonOverwrite(LoadLevel, this);
-    }
-
-    public void HidePolygons()
-    {
-        Shader shader = Shader.Find("Custom/Clipping");
-
-        for (int i = 0; i < Polyhedrons.Count; i++)
-        {
-            for (int e = 0; e < Polyhedrons[i].Render.Count; e++)
-            {
-                LevelMeshes[Faces[Polyhedrons[i].Render[e]].FaceMesh].GetComponent<Renderer>().enabled = false;
-                LevelMeshes[Faces[Polyhedrons[i].Render[e]].FaceMesh].GetComponent<Renderer>().material.shader = shader;
-            }
-        }
     }
 
     public void Playerstart()
@@ -242,14 +259,25 @@ public class Manager : MonoBehaviour
         }
     }
 
-    public void AddMeshCollider()
+    public void MakeMeshes()
     {
         for (int i = 0; i < Polyhedrons.Count; i++)
         {
-            for (int e = 0; e < Polyhedrons[i].Collision.Count; e++)
+            for (int e = 0; e < Polyhedrons[i].Portal.Count; e++)
             {
-                LevelMeshes[Faces[Polyhedrons[i].Collision[e]].FaceMesh].AddComponent<MeshCollider>();
-            }    
+                for (int b = 0; b < Polyhedrons[e].Render.Count; b++)
+                {
+                    RenderMeshes.Add(new Mesh());
+                }
+            }
+        }
+    }
+
+    public void MakeMeshes2()
+    {
+        for (int b = 0; b < 2000; b++)
+        {
+            RenderMeshes.Add(new Mesh());
         }
     }
 
@@ -326,8 +354,8 @@ public class Manager : MonoBehaviour
 
     public List<Vector3> ClippingPlane(List<Vector3> invertices, Plane aPlane, float aEpsilon = 0.001f)
     {
-        List<Vector3> outvertices = new List<Vector3>();
-        List<float> m_Dists = new List<float>();
+        outvertices.Clear();
+        m_Dists.Clear();
 
         int count = invertices.Count;
 
@@ -374,6 +402,47 @@ public class Manager : MonoBehaviour
         return invertices;
     }
 
+    public List<Vector3> SplitPlane(List<Vector3> invertices, Plane aPlane, float aEpsilon = 0.001f)
+    {
+        List<Vector3> outvertices = new List<Vector3>();
+        List<float> m_Dists = new List<float>();
+
+        int count = invertices.Count;
+
+        for (int i = 0; i < count; i++)
+        {
+            Vector3 p = invertices[i];
+            m_Dists.Add(PointDistanceToPlane(aPlane, p));
+        }
+        for (int i = 0; i < count; i++)
+        {
+            int j = (i + 1) % count;
+            float d1 = m_Dists[i];
+            float d2 = m_Dists[j];
+            Vector3 p1 = invertices[i];
+            Vector3 p2 = invertices[j];
+            bool split = d1 > aEpsilon;
+            if (split)
+            {
+                //outvertices.Add(p1);
+            }
+            else if (d1 > -aEpsilon)
+            {
+                // point on clipping plane so just keep it
+               // outvertices.Add(p1);
+                continue;
+            }
+            // both points are on the same side of the plane
+            if ((d2 > -aEpsilon && split) || (d2 < aEpsilon && !split))
+            {
+                continue;
+            }
+            float d = d1 / (d1 - d2);
+            outvertices.Add(p1 + (p2 - p1) * d);
+        }
+        return outvertices;
+    }
+
     public bool CheckRadius(Polyhedron asector, Vector3 campoint)
     {
         bool PointIn = true;
@@ -414,14 +483,12 @@ public class Manager : MonoBehaviour
         {
             Face f = Faces[ASector.Portal[i]];
 
-            bool t = CheckRadius(Polyhedrons[f.Portal], CamPoint);
-
             if (Sectors.Contains(Polyhedrons[f.Portal]))
             {
                 continue;
             }
 
-            if (t == true)
+            if (CheckRadius(Polyhedrons[f.Portal], CamPoint))
             {
                 GetPolyhedrons(Polyhedrons[f.Portal]);
 
@@ -429,15 +496,11 @@ public class Manager : MonoBehaviour
             }
         }
 
-        bool p = CheckPolyhedron(ASector, CamPoint);
-
-        if (p == true)
+        if (CheckPolyhedron(ASector, CamPoint))
         {
             CurrentSector = ASector;
 
-            IEnumerable<Polyhedron> except = Polyhedrons.Except(Sectors);
-
-            foreach (Polyhedron sector in except)
+            foreach (Polyhedron sector in Polyhedrons.Except(Sectors))
             {
                 foreach (int collision in sector.Collision)
                 {
@@ -461,20 +524,11 @@ public class Manager : MonoBehaviour
 
         VisitedSector.Add(BSector);
 
-        Array.Clear(PlanePos, 0, 20);
-
-        for (int i = 0; i < APlanes.Count; i++)
-        {
-            PlanePos[i] = new Vector4(APlanes[i].normal.x, APlanes[i].normal.y, APlanes[i].normal.z, APlanes[i].distance);
-        }
-
-        BlockOne.SetInt("_Int", APlanes.Count);
-
-        BlockOne.SetVectorArray("_Plane", PlanePos);
-
         for (int i = 0; i < BSector.Render.Count; i++)
         {
-            GameObject r = LevelMeshes[Faces[BSector.Render[i]].FaceMesh];
+            r = Faces[BSector.Render[i]].Vertices;
+
+            h = LevelMeshes[Faces[BSector.Render[i]].FaceMesh];
 
             float d = PointDistanceToPlane(Planes[BSector.Render[i]], CamPoint);
 
@@ -483,9 +537,55 @@ public class Manager : MonoBehaviour
                 continue;
             }
 
-            Matrix4x4 matrix = Matrix4x4.TRS(r.transform.position, r.transform.rotation, r.transform.lossyScale);
+            Triangles.Clear();
 
-            Graphics.DrawMesh(r.GetComponent<MeshFilter>().mesh, matrix, r.GetComponent<Renderer>().sharedMaterial, 0, Camera.main, 0, BlockOne, false, false);
+            UVs.Clear();
+
+            verticesout = ClippingPlanes(r, APlanes);
+
+            if (verticesout.Count > 2)
+            {
+                for (int e = 2; e < verticesout.Count; e++)
+                {
+                    b = e - 1;
+                    c = e;
+
+                    Triangles.Add(a);
+                    Triangles.Add(b);
+                    Triangles.Add(c);
+                }
+
+                if (Planes[BSector.Render[i]].normal.y == 1 || Planes[BSector.Render[i]].normal.y == -1 || Planes[BSector.Render[i]].normal.x == 0 &&
+                    Planes[BSector.Render[i]].normal.y == 0 && Planes[BSector.Render[i]].normal.z == 0)
+                {
+                    for (int e = 0; e < verticesout.Count; e++)
+                    {
+                        UVs.Add(new Vector2(PointDistanceToPlane(XPlane, verticesout[e]) / 2.5f, PointDistanceToPlane(YPlane, verticesout[e]) / 2.5f));
+                    }
+                }
+                else
+                {
+                    LeftPlane = new Plane((r[2] - r[1]).normalized, r[1]);
+                    TopPlane = new Plane((r[1] - r[0]).normalized, r[1]);
+
+                    for (int e = 0; e < verticesout.Count; e++)
+                    {
+                        UVs.Add(new Vector2(PointDistanceToPlane(LeftPlane, verticesout[e]) / 2.5f, PointDistanceToPlane(TopPlane, verticesout[e]) / 2.5f));
+                    }
+                }
+
+                RenderMeshes[rm].Clear();
+
+                RenderMeshes[rm].SetVertices(verticesout);
+                RenderMeshes[rm].SetUVs(0, UVs);
+                RenderMeshes[rm].SetTriangles(Triangles, 0, true);
+                RenderMeshes[rm].RecalculateNormals();
+
+                Graphics.RenderMesh(new RenderParams(h.GetComponent<Renderer>().sharedMaterial), RenderMeshes[rm], 0, 
+                Matrix4x4.TRS(h.transform.position, h.transform.transform.rotation, h.transform.transform.lossyScale));
+
+                rm++;
+            }
         }
 
         for (int i = 0; i < BSector.Portal.Count; ++i)
@@ -494,7 +594,7 @@ public class Manager : MonoBehaviour
 
             float d = PointDistanceToPlane(Planes[BSector.Portal[i]], CamPoint);
 
-            List<Plane> PortalPlanes = new List<Plane>();
+            List<Plane> PortalPlanes = new List<Plane>(4);
 
             if (d < -0.1f)
             {
@@ -520,10 +620,11 @@ public class Manager : MonoBehaviour
 
             if (d != 0)
             {
-                List<Vector3> verticesout = ClippingPlanes(g.Vertices, APlanes);
+                verticesout = ClippingPlanes(g.Vertices, APlanes);
 
                 if (verticesout.Count > 2)
                 {
+
                     CreateClippingPlanes(verticesout, PortalPlanes, CamPoint);
 
                     GetPortals(PortalPlanes, Polyhedrons[g.Portal]);
