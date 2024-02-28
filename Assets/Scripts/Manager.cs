@@ -553,7 +553,7 @@ public class Manager : MonoBehaviour
 
             float d = PointDistanceToPlane(Planes[BSector.Portal[i]], CamPoint);
 
-            List<Plane> PortalPlanes = new List<Plane>(4);
+            List<Plane> PortalPlanes = new List<Plane>();
 
             if (d < -0.1f)
             {
