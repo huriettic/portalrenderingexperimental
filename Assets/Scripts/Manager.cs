@@ -259,7 +259,7 @@ public class Manager : MonoBehaviour
         {
             for (int e = 0; e < Polyhedrons[i].Portal.Count; e++)
             {
-                for (int b = 0; b < Polyhedrons[e].Render.Count; b++)
+                for (int b = 0; b < Polyhedrons[i].Render.Count; b++)
                 {
                     RenderMeshes.Add(new Mesh());
                 }
