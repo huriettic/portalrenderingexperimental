@@ -340,11 +340,14 @@ public class Manager : MonoBehaviour
 
     public List<Vector3> ClippingPlane(List<Vector3> invertices, Plane aPlane, float aEpsilon = 0.001f)
     {
-        outvertices.Clear();
         m_Dists.Clear();
-
+        outvertices.Clear();
+        
         int count = invertices.Count;
-
+        if (m_Dists.Capacity < count)
+            m_Dists.Capacity = count;
+        if (outvertices.Capacity < count)
+            outvertices.Capacity = count;
         for (int i = 0; i < count; i++)
         {
             Vector3 p = invertices[i];
