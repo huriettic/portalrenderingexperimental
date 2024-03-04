@@ -63,7 +63,11 @@ public class Manager : MonoBehaviour
 
     public List<GameObject> LevelMeshes = new List<GameObject>();
 
-    public List<Vector3> verticesout = new List<Vector3>();
+    public List<List<Plane>> ListOfListPlanes = new List<List<Plane>>();
+
+    public List<List<Vector3>> ListOfListVertices = new List<List<Vector3>>();
+
+    public List<int> planetemp = new List<int>();
 
     public List<int> Triangles = new List<int>();
 
@@ -173,6 +177,10 @@ public class Manager : MonoBehaviour
         VisitedSector.Clear();
 
         rm = 0;
+
+        ListOfListPlanes.Clear();
+
+        ListOfListVertices.Clear();
 
         GetPortals(CamPlanes, CurrentSector);
     }
@@ -387,6 +395,8 @@ public class Manager : MonoBehaviour
         for (int i = 0; i < aPlanes.Count; i++)
         {
             invertices = new List<Vector3>(ClippingPlane(invertices, aPlanes[i]));
+
+            ListOfListVertices.Add(invertices);
         }
         return invertices;
     }
@@ -495,7 +505,9 @@ public class Manager : MonoBehaviour
 
             UVs.Clear();
 
-            verticesout = ClippingPlanes(r, APlanes);
+            List<Vector3> verticesout = ClippingPlanes(r, APlanes);
+
+            ListOfListVertices.Add(verticesout);
 
             if (verticesout.Count > 2)
             {
@@ -522,6 +534,13 @@ public class Manager : MonoBehaviour
                 {
                     LeftPlane = new Plane((r[2] - r[1]).normalized, r[1]);
                     TopPlane = new Plane((r[1] - r[0]).normalized, r[1]);
+
+                    List<Plane> planes = new List<Plane>()
+                    {
+                        LeftPlane, TopPlane
+                    };
+
+                    ListOfListPlanes.Add(planes);
 
                     for (int e = 0; e < verticesout.Count; e++)
                     {
@@ -558,6 +577,8 @@ public class Manager : MonoBehaviour
 
             List<Plane> PortalPlanes = new List<Plane>();
 
+            ListOfListPlanes.Add(PortalPlanes);
+
             if (d < -0.1f)
             {
                 continue;
@@ -582,7 +603,9 @@ public class Manager : MonoBehaviour
 
             if (d != 0)
             {
-                verticesout = ClippingPlanes(g.Vertices, APlanes);
+                List<Vector3> verticesout = ClippingPlanes(g.Vertices, APlanes);
+
+                ListOfListVertices.Add(verticesout);
 
                 if (verticesout.Count > 2)
                 {
