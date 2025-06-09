@@ -23,19 +23,19 @@ public class Manager : MonoBehaviour
     private Plane TopPlane;
     private Plane LeftPlane;
 
-    public float lerpX;
-    public float lerpY;
-    public float snap = 25f;
-    public float rotationX;
-    public float rotationY;
-    public float lookAngle = 90f;
-    public float sensitivityX = 10f;
-    public float sensitivityY = 10f;
-    public float speed = 6f;
-    public float jumpHeight = 8f;
-    public float gravity = 20f;
+    public float speed = 7f;
+    public float jumpHeight = 2f;
+    public float gravity = 5f;
+    public float sensitivity = 10f;
+    public float clampAngle = 90f;
+    public float smoothFactor = 25f;
+
+    private Vector2 targetRotation;
+    private Vector3 targetMovement;
+    private Vector2 currentRotation;
+    private Vector3 currentForce;
+
     public CharacterController Player;
-    private Vector3 moveDirection = Vector3.zero;
 
     public Camera Cam;
 
@@ -160,7 +160,7 @@ public class Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Controller();
+        PlayerInput();
 
         Sectors.Clear();
 
@@ -183,6 +183,14 @@ public class Manager : MonoBehaviour
         ListOfListVertices.Clear();
 
         GetPortals(CamPlanes, CurrentSector);
+    }
+
+    void FixedUpdate()
+    {
+        if (!Player.isGrounded)
+        {
+            currentForce.y -= gravity * Time.deltaTime;
+        }
     }
 
     public void Load()
@@ -287,11 +295,6 @@ public class Manager : MonoBehaviour
         }
     }
 
-    public float PointDistanceToPlane(Plane plane, Vector3 point)
-    {
-        return plane.normal.x * point.x + plane.normal.y * point.y + plane.normal.z * point.z + plane.distance;
-    }
-
     public void CreateClippingPlanes(List<Vector3> aVertices, List<Plane> aList, Vector3 aViewPos)
     {
         int count = aVertices.Count;
@@ -308,42 +311,36 @@ public class Manager : MonoBehaviour
         }
     }
 
-    public void Controller()
+    public void PlayerInput()
     {
-        if (Input.GetKey("escape"))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit();
         }
-
-        if (Input.GetButton("Jump") && Player.isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && Player.isGrounded)
         {
-            moveDirection.y = jumpHeight;
-        }
-        else
-        {
-            moveDirection.y -= gravity * Time.deltaTime;
+            currentForce.y = jumpHeight;
         }
 
-        float mouseX = Input.GetAxis("Mouse X") * sensitivityX;
-        float mouseY = Input.GetAxis("Mouse Y") * sensitivityY;
+        float mousex = Input.GetAxisRaw("Mouse X");
+        float mousey = Input.GetAxisRaw("Mouse Y");
 
-        rotationY += mouseX;
-        rotationX -= mouseY;
+        targetRotation.x -= mousey * sensitivity;
+        targetRotation.y += mousex * sensitivity;
 
-        rotationX = Mathf.Clamp(rotationX, -lookAngle, lookAngle);
-        lerpX = Mathf.Lerp(lerpX, rotationX, snap * Time.deltaTime);
-        lerpY = Mathf.Lerp(lerpY, rotationY, snap * Time.deltaTime);
+        targetRotation.x = Mathf.Clamp(targetRotation.x, -clampAngle, clampAngle);
 
-        Camera.main.transform.rotation = Quaternion.Euler(lerpX, lerpY, 0);
-        transform.rotation = Quaternion.Euler(0, lerpY, 0);
+        currentRotation = Vector2.Lerp(currentRotation, targetRotation, smoothFactor * Time.deltaTime);
 
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+        Cam.transform.localRotation = Quaternion.Euler(currentRotation.x, 0f, 0f);
+        Player.transform.rotation = Quaternion.Euler(0f, currentRotation.y, 0f);
 
-        Vector3 move = transform.right * x + transform.forward * z;
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
 
-        Player.Move(move * speed * Time.deltaTime);
-        Player.Move(moveDirection * Time.deltaTime);
+        targetMovement = (Player.transform.right * horizontal + Player.transform.forward * vertical).normalized;
+
+        Player.Move((targetMovement + currentForce) * speed * Time.deltaTime);
     }
 
     public List<Vector3> ClippingPlane(List<Vector3> invertices, Plane aPlane, float aEpsilon = 0.001f)
@@ -359,7 +356,7 @@ public class Manager : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             Vector3 p = invertices[i];
-            m_Dists.Add(PointDistanceToPlane(aPlane, p));
+            m_Dists.Add(aPlane.GetDistanceToPoint(p));
         }
         for (int i = 0; i < count; i++)
         {
@@ -407,7 +404,7 @@ public class Manager : MonoBehaviour
 
         for (int e = 0; e < asector.Planes.Count; e++)
         {
-            if (PointDistanceToPlane(Planes[asector.Planes[e]], campoint) < -0.6f)
+            if (Planes[asector.Planes[e]].GetDistanceToPoint(campoint) < -0.6f)
             {
                 PointIn = false;
                 break;
@@ -422,7 +419,7 @@ public class Manager : MonoBehaviour
 
         for (int i = 0; i < asector.Planes.Count; i++)
         {
-            if (PointDistanceToPlane(Planes[asector.Planes[i]], campoint) < 0)
+            if (Planes[asector.Planes[i]].GetDistanceToPoint(campoint) < 0)
             {
                 PointIn = false;
                 break;
@@ -494,7 +491,7 @@ public class Manager : MonoBehaviour
 
             GameObject h = LevelMeshes[Faces[BSector.Render[i]].FaceMesh];
 
-            float d = PointDistanceToPlane(Planes[BSector.Render[i]], CamPoint);
+            float d = Planes[BSector.Render[i]].GetDistanceToPoint(CamPoint);
 
             if (d < -0.1f)
             {
@@ -527,7 +524,7 @@ public class Manager : MonoBehaviour
                 {
                     for (int e = 0; e < verticesout.Count; e++)
                     {
-                        UVs.Add(new Vector2(PointDistanceToPlane(XPlane, verticesout[e]) / 2.5f, PointDistanceToPlane(YPlane, verticesout[e]) / 2.5f));
+                        UVs.Add(new Vector2(XPlane.GetDistanceToPoint(verticesout[e]) / 2.5f, YPlane.GetDistanceToPoint(verticesout[e]) / 2.5f));
                     }
                 }
                 else
@@ -544,7 +541,7 @@ public class Manager : MonoBehaviour
 
                     for (int e = 0; e < verticesout.Count; e++)
                     {
-                        UVs.Add(new Vector2(PointDistanceToPlane(LeftPlane, verticesout[e]) / 2.5f, PointDistanceToPlane(TopPlane, verticesout[e]) / 2.5f));
+                        UVs.Add(new Vector2(LeftPlane.GetDistanceToPoint(verticesout[e]) / 2.5f, TopPlane.GetDistanceToPoint(verticesout[e]) / 2.5f));
                     }
                 }
 
@@ -573,7 +570,7 @@ public class Manager : MonoBehaviour
         {
             Face g = Faces[BSector.Portal[i]];
 
-            float d = PointDistanceToPlane(Planes[BSector.Portal[i]], CamPoint);
+            float d = Planes[BSector.Portal[i]].GetDistanceToPoint(CamPoint);
 
             List<Plane> PortalPlanes = new List<Plane>();
 
